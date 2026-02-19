@@ -6,8 +6,18 @@ import { projects } from "../data/projects";
 import Layout from "./Layout";
 
 export default function ProjectsSection() {
+    // Define exact project groups by Title or ID
+    const topRowProjects = projects.filter(p => ["쉼온", "젤리주식", "듀센트"].includes(p.title));
+    const bottomRowProjects = projects.filter(p => ["루멘", "센스가드"].includes(p.title));
+
+    // Sort top row explicitly if needed (Shim On, Jelly, Dewscent in order)
+    // projects array order: Lumen, Shim On, Jelly, Dewscent, Sense Guard
+    // Filter preserves relative order, so Top Row will be: Shim On, Jelly, Dewscent. Correct.
+    // Bottom Row will be: Lumen, Sense Guard. Correct.
+
     return (
         <Layout id="projects" className="py-24 bg-transparent">
+            {/* Section Header */}
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -21,23 +31,40 @@ export default function ProjectsSection() {
                 <div className="h-1 w-20 bg-gray-900 mx-auto rounded-full opacity-20" />
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                {projects.map((project, index) => {
-                    const isFeatured = index === 0;
-
-                    return (
+            <div className="max-w-5xl mx-auto flex flex-col gap-16">
+                {/* Top Grid: 3 Columns */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {topRowProjects.map((project, index) => (
                         <motion.div
                             key={project.id}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true, margin: "-50px" }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className={isFeatured ? "md:col-span-2" : ""}
                         >
-                            <ProjectCard project={project} isFeatured={isFeatured} />
+                            <ProjectCard project={project} isFeatured={false} />
                         </motion.div>
-                    );
-                })}
+                    ))}
+                </div>
+
+                {/* Bottom Grid: 2 Columns */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-4/5 lg:mx-auto">
+                    {bottomRowProjects.map((project, index) => {
+                        // Check if project is Lumen to pass isFeatured
+                        const isFeatured = project.title === "루멘";
+                        return (
+                            <motion.div
+                                key={project.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                            >
+                                <ProjectCard project={project} isFeatured={isFeatured} />
+                            </motion.div>
+                        );
+                    })}
+                </div>
             </div>
         </Layout>
     );
