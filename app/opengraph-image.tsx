@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
+
 
 export const alt = "김다슬 포트폴리오";
 export const size = {
