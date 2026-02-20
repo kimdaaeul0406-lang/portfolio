@@ -4,6 +4,7 @@ export interface Project {
     description: string;
     keyPoint?: string;
     image: string;
+    images?: string[];
     github: string;
     live: string;
     tags?: string[];

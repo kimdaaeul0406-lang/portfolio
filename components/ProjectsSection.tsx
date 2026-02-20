@@ -54,7 +54,7 @@ export default function ProjectsSection() {
                 {/* Bottom Grid: 2 Columns */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-4/5 lg:mx-auto">
                     {bottomRowProjects.map((project, index) => {
-                        const isFeatured = project.title === "루멘";
+                        const isFeatured = true;
                         return (
                             <motion.div
                                 key={project.id}

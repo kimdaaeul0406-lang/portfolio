@@ -2,10 +2,10 @@
 
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Github, ExternalLink, ImageIcon } from "lucide-react";
+import { X, Github, ExternalLink, ImageIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Project } from "../types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface ProjectModalProps {
     project: Project | null;
@@ -14,6 +14,43 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
+    const [currentImage, setCurrentImage] = useState<string | null>(null);
+    const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+    const [direction, setDirection] = useState(0);
+
+    const galleryImages = project ? [project.image, ...(project.images || [])] : [];
+
+    // Initialize current image when project opens
+    useEffect(() => {
+        if (project) {
+            setCurrentImage(project.image);
+            setLightboxIndex(null); // Reset lightbox
+        }
+    }, [project]);
+
+    // Keyboard navigation for lightbox
+    useEffect(() => {
+        if (lightboxIndex === null) return;
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "ArrowLeft") navigate(-1);
+            if (e.key === "ArrowRight") navigate(1);
+            if (e.key === "Escape") setLightboxIndex(null);
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [lightboxIndex]);
+
+    const navigate = (newDirection: number) => {
+        setDirection(newDirection);
+        setLightboxIndex((prev) => {
+            if (prev === null) return null;
+            const total = galleryImages.length;
+            return (prev + newDirection + total) % total;
+        });
+    };
+
     // Lock body scroll when modal is open
     useEffect(() => {
         if (isOpen) {
@@ -34,6 +71,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 <>
                     {/* Backdrop */}
                     <motion.div
+                        key="backdrop"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -43,6 +81,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
                     {/* Modal */}
                     <motion.div
+                        key="modal"
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -58,15 +97,23 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                             {/* Inner scrollable area - scrollbar hidden */}
                             <div className="overflow-y-auto max-h-[85vh] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
                                 {/* Header Image Area */}
-                                <div className="relative w-full h-56 md:h-72 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
-                                    {project.image ? (
-                                        <Image
-                                            src={project.image}
-                                            alt={project.title}
-                                            fill
-                                            className="object-cover"
-                                            sizes="(max-width: 768px) 100vw, 640px"
-                                        />
+                                <div className="relative w-full h-56 md:h-72 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden group">
+                                    {currentImage ? (
+                                        <button
+                                            onClick={() => {
+                                                setLightboxIndex(0);
+                                                setDirection(0);
+                                            }}
+                                            className="relative w-full h-full cursor-zoom-in"
+                                        >
+                                            <Image
+                                                src={currentImage}
+                                                alt={project.title}
+                                                fill
+                                                className="object-cover"
+                                                sizes="(max-width: 768px) 100vw, 640px"
+                                            />
+                                        </button>
                                     ) : (
                                         <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-300">
                                             <ImageIcon className="w-12 h-12 mb-2" />
@@ -107,25 +154,58 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                                         </div>
                                     )}
 
-                                    {/* Screenshots Placeholder */}
-                                    <div className="mb-8">
-                                        <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
-                                            주요 화면
-                                        </p>
-                                        <div className="grid grid-cols-3 gap-3">
-                                            {[1, 2, 3].map((i) => (
-                                                <div
-                                                    key={i}
-                                                    className="aspect-video bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-100 flex items-center justify-center text-gray-300"
-                                                >
-                                                    <ImageIcon className="w-6 h-6" />
-                                                </div>
-                                            ))}
+                                    {/* Screenshots Gallery */}
+                                    {project.images && project.images.length > 0 ? (
+                                        <div className="mb-8">
+                                            <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
+                                                주요 화면 (클릭하여 확대)
+                                            </p>
+                                            <div className="grid grid-cols-3 gap-3">
+                                                {/* Additional Images */}
+                                                {project.images.map((img, i) => (
+                                                    <button
+                                                        key={i}
+                                                        onClick={() => {
+                                                            setLightboxIndex(i + 1); // +1 because index 0 is main image
+                                                            setDirection(0);
+                                                        }}
+                                                        className={`relative aspect-video rounded-xl overflow-hidden border-2 transition-all cursor-zoom-in ${currentImage === img
+                                                            ? "border-blue-500 ring-2 ring-blue-200"
+                                                            : "border-gray-100 hover:border-gray-300"
+                                                            }`}
+                                                    >
+                                                        <Image
+                                                            src={img}
+                                                            alt={`Screenshot ${i + 1}`}
+                                                            fill
+                                                            className="object-cover"
+                                                            sizes="(max-width: 768px) 33vw, 200px"
+                                                        />
+                                                    </button>
+                                                ))}
+                                            </div>
                                         </div>
-                                        <p className="text-xs text-gray-300 mt-2 text-center">
-                                            스크린샷 업데이트 예정
-                                        </p>
-                                    </div>
+                                    ) : (
+                                        /* Placeholder if no images */
+                                        <div className="mb-8">
+                                            <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
+                                                주요 화면
+                                            </p>
+                                            <div className="grid grid-cols-3 gap-3">
+                                                {[1, 2, 3].map((i) => (
+                                                    <div
+                                                        key={i}
+                                                        className="aspect-video bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-100 flex items-center justify-center text-gray-300"
+                                                    >
+                                                        <ImageIcon className="w-6 h-6" />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <p className="text-xs text-gray-300 mt-2 text-center">
+                                                스크린샷 업데이트 예정
+                                            </p>
+                                        </div>
+                                    )}
 
                                     {/* Tech Stack */}
                                     {project.techStack && (
@@ -172,6 +252,97 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                         </div>
                     </motion.div>
                 </>
+            )}
+
+            {/* Lightbox Overlay */}
+            {lightboxIndex !== null && (
+                <motion.div
+                    key="lightbox"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-[11000] bg-black/80 flex items-center justify-center gap-2 md:gap-8 p-4"
+                    onClick={() => setLightboxIndex(null)}
+                >
+                    {/* Left Button */}
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(-1);
+                        }}
+                        className="p-3 text-gray-900 bg-white/90 hover:bg-white rounded-full transition-all shadow-lg hover:scale-110 z-[11010]"
+                    >
+                        <ChevronLeft size={28} />
+                    </button>
+
+                    {/* Image Container */}
+                    <div
+                        className="relative flex-1 max-w-5xl h-full max-h-[85vh] flex items-center justify-center"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <AnimatePresence initial={false} custom={direction} mode="wait">
+                            <motion.div
+                                key={lightboxIndex}
+                                custom={direction}
+                                variants={{
+                                    enter: (direction: number) => ({
+                                        x: direction > 0 ? 300 : -300,
+                                        opacity: 0
+                                    }),
+                                    center: {
+                                        zIndex: 1,
+                                        x: 0,
+                                        opacity: 1
+                                    },
+                                    exit: (direction: number) => ({
+                                        zIndex: 0,
+                                        x: direction < 0 ? 300 : -300,
+                                        opacity: 0
+                                    })
+                                }}
+                                initial="enter"
+                                animate="center"
+                                exit="exit"
+                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                className="relative w-full h-full pointer-events-none"
+                            >
+                                <Image
+                                    src={galleryImages[lightboxIndex]}
+                                    alt="Full screen"
+                                    fill
+                                    className="object-contain pointer-events-auto"
+                                    sizes="100vw"
+                                    quality={100}
+                                    priority
+                                />
+                            </motion.div>
+                        </AnimatePresence>
+                    </div>
+
+                    {/* Right Button */}
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(1);
+                        }}
+                        className="p-3 text-gray-900 bg-white/90 hover:bg-white rounded-full transition-all shadow-lg hover:scale-110 z-[11010]"
+                    >
+                        <ChevronRight size={28} />
+                    </button>
+
+                    {/* Close Button */}
+                    <button
+                        onClick={() => setLightboxIndex(null)}
+                        className="absolute top-4 right-4 z-[11020] text-white/80 hover:text-white p-2 bg-black/40 hover:bg-black/60 rounded-full transition-all"
+                    >
+                        <X size={24} />
+                    </button>
+
+                    {/* Image Counter */}
+                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white font-medium px-4 py-1.5 bg-black/40 backdrop-blur-md border border-white/10 rounded-full text-sm">
+                        {lightboxIndex + 1} / {galleryImages.length}
+                    </div>
+                </motion.div>
             )}
         </AnimatePresence>
     );

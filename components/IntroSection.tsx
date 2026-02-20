@@ -9,24 +9,24 @@ export default function IntroSection() {
     const keywords = ["Pastel UI", "Responsive Web", "AI + Data"];
 
     return (
-        <Layout id="intro" className="min-h-screen items-center text-center relative overflow-hidden">
+        <Layout id="intro" className="min-h-screen items-center text-center relative overflow-hidden" maxWidth="max-w-[1920px]">
             {/* Floating Pastel Blobs */}
             <div className="absolute inset-0 -z-1 overflow-hidden pointer-events-none">
                 <motion.div
-                    className="absolute w-[400px] h-[400px] rounded-full opacity-30 blur-3xl"
-                    style={{ background: "linear-gradient(135deg, #FECDD3, #FDE68A)", top: "10%", left: "-5%" }}
+                    className="absolute w-[500px] h-[500px] md:w-[600px] md:h-[600px] rounded-full opacity-40 blur-[100px]"
+                    style={{ background: "linear-gradient(135deg, #FECDD3, #FDE68A)", top: "-10%", left: "-10%" }}
                     animate={{ y: [0, -30, 0], x: [0, 15, 0], scale: [1, 1.05, 1] }}
                     transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                 />
                 <motion.div
-                    className="absolute w-[350px] h-[350px] rounded-full opacity-25 blur-3xl"
-                    style={{ background: "linear-gradient(135deg, #C7D2FE, #BAE6FD)", top: "20%", right: "-8%" }}
+                    className="absolute w-[450px] h-[450px] md:w-[550px] md:h-[550px] rounded-full opacity-35 blur-[100px]"
+                    style={{ background: "linear-gradient(135deg, #C7D2FE, #BAE6FD)", top: "30%", right: "-10%" }}
                     animate={{ y: [0, 25, 0], x: [0, -20, 0], scale: [1, 1.08, 1] }}
                     transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 />
                 <motion.div
-                    className="absolute w-[300px] h-[300px] rounded-full opacity-20 blur-3xl"
-                    style={{ background: "linear-gradient(135deg, #DDD6FE, #FBCFE8)", bottom: "5%", left: "30%" }}
+                    className="absolute w-[400px] h-[400px] md:w-[500px] md:h-[500px] rounded-full opacity-30 blur-[100px]"
+                    style={{ background: "linear-gradient(135deg, #DDD6FE, #FBCFE8)", bottom: "-5%", left: "20%" }}
                     animate={{ y: [0, -20, 0], x: [0, 10, 0], scale: [1, 1.03, 1] }}
                     transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
                 />
@@ -37,7 +37,7 @@ export default function IntroSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, ease: "easeOut" }}
-                className="flex flex-col items-center relative z-10"
+                className="flex flex-col items-center relative z-10 w-full px-6 py-12 md:py-28"
             >
                 {/* Profile Photo */}
                 <div className="w-28 h-28 rounded-full overflow-hidden mb-6 border-2 border-white shadow-lg bg-gradient-to-br from-indigo-50 to-pink-50 flex items-center justify-center">
@@ -61,14 +61,14 @@ export default function IntroSection() {
                 </span>
 
                 {/* Main Heading */}
-                <h1 className="text-4xl md:text-6xl font-light text-gray-900 leading-tight tracking-tight mb-6">
-                    감성은 설계하고,<br className="hidden md:block" />
-                    <span className="font-normal text-gray-800">기능은 끝까지 구현합니다.</span>
+                <h1 className="text-3xl md:text-6xl font-light text-gray-900 leading-snug md:leading-tight tracking-tight mb-6 break-keep text-balance">
+                    감성은 설계하고,&nbsp;<br className="hidden md:block" />
+                    <span className="font-semibold text-gray-800">기능은 끝까지 구현합니다.</span>
                 </h1>
 
                 {/* Subtitle */}
-                <p className="text-sm md:text-base text-gray-400 font-medium leading-relaxed mb-10 max-w-md">
-                    PHP 풀스택부터 Next.js + AI까지,<br className="hidden md:block" />
+                <p className="text-sm md:text-lg text-gray-500 font-medium leading-relaxed mb-10 max-w-3xl break-keep text-balance">
+                    PHP 풀스택부터 Next.js + AI까지,&nbsp;<br className="hidden md:block" />
                     매 프로젝트마다 기술의 폭을 넓혀온 주니어 개발자입니다.
                 </p>
 

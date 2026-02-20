@@ -5,9 +5,10 @@ interface LayoutProps {
     children: ReactNode;
     className?: string;
     id?: string;
+    maxWidth?: string;
 }
 
-export default function Layout({ children, className, id }: LayoutProps) {
+export default function Layout({ children, className, id, maxWidth = "max-w-7xl" }: LayoutProps) {
     return (
         <section
             id={id}
@@ -16,7 +17,7 @@ export default function Layout({ children, className, id }: LayoutProps) {
                 className
             )}
         >
-            <div className="max-w-5xl w-full mx-auto relative z-10">
+            <div className={cn("w-full mx-auto relative z-10", maxWidth)}>
                 {children}
             </div>
         </section>

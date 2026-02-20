@@ -57,9 +57,9 @@ export default function OutroSection() {
 
                 <button
                     onClick={scrollToTop}
-                    className="group flex flex-col items-center gap-3 text-gray-400 hover:text-gray-900 transition-colors mx-auto"
+                    className="group flex flex-col items-center gap-3 text-gray-400 hover:text-sky-400 transition-colors mx-auto"
                 >
-                    <div className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-gray-900 group-hover:bg-white transition-all duration-300">
+                    <div className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-sky-200 group-hover:bg-sky-50 transition-all duration-300 shadow-sm group-hover:shadow-md group-hover:shadow-sky-100">
                         <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
                     </div>
                 </button>

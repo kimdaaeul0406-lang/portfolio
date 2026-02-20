@@ -16,8 +16,8 @@ export default function ProjectCard({ project, isFeatured = false, onSelect }: P
             onClick={onSelect}
             className={`group flex flex-col h-full rounded-2xl overflow-hidden transition-all duration-500 border bg-white cursor-pointer
             ${isFeatured
-                    ? 'border-blue-100 shadow-lg hover:shadow-[0_8px_30px_rgba(129,140,248,0.2)] hover:-translate-y-1'
-                    : 'border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgba(196,181,253,0.15)] hover:-translate-y-1'}
+                    ? 'border-blue-100 shadow-lg hover:shadow-[0_8px_30px_rgba(129,140,248,0.2)] hover:-translate-y-1 min-h-[520px]'
+                    : 'border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgba(196,181,253,0.15)] hover:-translate-y-1 min-h-[450px]'}
             `}
         >
             {/* Image Container */}
