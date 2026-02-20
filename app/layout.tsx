@@ -53,9 +53,7 @@ export const metadata: Metadata = {
       "감성은 설계하고, 기능은 끝까지 구현합니다. Pastel UI · Responsive Web · AI + Data",
     images: [`${siteUrl}/opengraph-image`],
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
+
 };
 
 export default function RootLayout({
