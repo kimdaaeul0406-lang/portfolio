@@ -1,19 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import ProjectCard from "./ProjectCard";
+import ProjectModal from "./ProjectModal";
 import { projects } from "../data/projects";
+import { Project } from "../types";
 import Layout from "./Layout";
 
 export default function ProjectsSection() {
+    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
     // Define exact project groups by Title or ID
     const topRowProjects = projects.filter(p => ["쉼온", "젤리주식", "듀센트"].includes(p.title));
     const bottomRowProjects = projects.filter(p => ["루멘", "센스가드"].includes(p.title));
-
-    // Sort top row explicitly if needed (Shim On, Jelly, Dewscent in order)
-    // projects array order: Lumen, Shim On, Jelly, Dewscent, Sense Guard
-    // Filter preserves relative order, so Top Row will be: Shim On, Jelly, Dewscent. Correct.
-    // Bottom Row will be: Lumen, Sense Guard. Correct.
 
     return (
         <Layout id="projects" className="py-24 bg-transparent">
@@ -42,7 +42,11 @@ export default function ProjectsSection() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                         >
-                            <ProjectCard project={project} isFeatured={false} />
+                            <ProjectCard
+                                project={project}
+                                isFeatured={false}
+                                onSelect={() => setSelectedProject(project)}
+                            />
                         </motion.div>
                     ))}
                 </div>
@@ -50,7 +54,6 @@ export default function ProjectsSection() {
                 {/* Bottom Grid: 2 Columns */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-4/5 lg:mx-auto">
                     {bottomRowProjects.map((project, index) => {
-                        // Check if project is Lumen to pass isFeatured
                         const isFeatured = project.title === "루멘";
                         return (
                             <motion.div
@@ -60,12 +63,23 @@ export default function ProjectsSection() {
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                             >
-                                <ProjectCard project={project} isFeatured={isFeatured} />
+                                <ProjectCard
+                                    project={project}
+                                    isFeatured={isFeatured}
+                                    onSelect={() => setSelectedProject(project)}
+                                />
                             </motion.div>
                         );
                     })}
                 </div>
             </div>
+
+            {/* Project Detail Modal */}
+            <ProjectModal
+                project={selectedProject}
+                isOpen={!!selectedProject}
+                onClose={() => setSelectedProject(null)}
+            />
         </Layout>
     );
 }

@@ -42,7 +42,7 @@ export default function SkillsSection() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                                className={`bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-blue-50 transition-all ${gridClass}`}
+                                className={`bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-[0_8px_30px_rgba(196,181,253,0.12)] hover:border-indigo-100 hover:-translate-y-0.5 transition-all duration-500 ${gridClass}`}
                             >
                                 <h3 className="text-lg font-bold text-gray-900 mb-6 border-b border-gray-100 pb-3 flex items-center justify-between">
                                     {category.category}
@@ -55,7 +55,7 @@ export default function SkillsSection() {
                                     {category.skills.map((skill) => (
                                         <span
                                             key={skill}
-                                            className="inline-flex items-center px-3.5 py-1.5 text-sm font-semibold text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-default"
+                                            className="inline-flex items-center px-3.5 py-1.5 text-sm font-semibold text-gray-700 bg-gray-50 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-300 cursor-default"
                                         >
                                             {skill}
                                         </span>

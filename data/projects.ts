@@ -5,50 +5,50 @@ export const projects: Project[] = [
         id: 4,
         title: "루멘",
         description: "AI 기반 사주/타로 서비스",
+        keyPoint: "OpenAI API의 프롬프트를 사용자 입력에 따라 동적으로 설계하고, 스트리밍 응답 처리로 실시간 해석 경험을 구현했습니다.",
         image: "/lumen.jpg",
         github: "https://github.com/kimdaaeul0406-lang/LUMEN",
         live: "https://lumen-demo.vercel.app/",
-        techStack: ["Next.js", "OpenAI API", "Tailwind CSS"],
-
+        techStack: ["Next.js", "OpenAI API", "Supabase", "Tailwind CSS"],
     },
     {
         id: 1,
         title: "쉼온",
         description: "힐링 감성 웹 서비스",
+        keyPoint: "PHP로 사용자 인증과 MySQL 데이터 관리를 직접 구축하고, 커뮤니티 피드까지 1인 개발한 첫 풀스택 프로젝트입니다.",
         image: "/shimon.jpg",
         github: "https://github.com/kimdaaeul0406-lang/shim_on",
         live: "http://daseul0406.dothome.co.kr/index.php?page=welcome",
         techStack: ["PHP", "Vanilla JS", "MySQL"],
-        // field removed
     },
     {
         id: 2,
         title: "젤리주식",
         description: "주식 분석 대시보드 UI",
+        keyPoint: "REST API로 실시간 주식 데이터를 연동하고, Chart.js를 활용해 직관적으로 분석할 수 있는 대시보드 UI를 설계했습니다.",
         image: "/jelly-stock.jpg",
         github: "https://github.com/kimdaaeul0406-lang/JELLY",
         live: "https://magnificent-pavlova-9b9515.netlify.app/",
         techStack: ["React", "Chart.js", "Rest API"],
-        // field removed
     },
     {
         id: 3,
         title: "듀센트",
         description: "브랜딩 중심 감성 웹",
+        keyPoint: "PHP와 MySQL로 백엔드를 구축하고, CSS 애니메이션과 레이아웃으로 브랜드의 감성을 전달하는 데 집중한 프로젝트입니다.",
         image: "/dewscent.jpg",
         github: "https://github.com/kimdaaeul0406-lang/dewscent",
         live: "http://dewscent.dothome.co.kr/",
-        techStack: ["HTML5", "CSS3", "jQuery"],
-        // field removed
+        techStack: ["HTML5", "CSS3", "jQuery", "PHP", "MySQL"],
     },
     {
         id: 5,
         title: "센스가드",
         description: "AI + 공공데이터 기반 안전 알림",
+        keyPoint: "다양한 형태의 공공데이터 API를 통합 가공하고, Transformer.js로 온디바이스 AI 분석을 구현한 안전 정보 서비스입니다.",
         image: "/sense-guard.jpg",
         github: "https://github.com/kimdaaeul0406-lang/SENSE-GUARD",
         live: "https://sense-guard.vercel.app/",
-        techStack: ["Next.js", "Public Data API", "Transformer.js"],
-        // field removed
+        techStack: ["Next.js", "Supabase", "Public Data API", "Transformer.js"],
     },
 ];

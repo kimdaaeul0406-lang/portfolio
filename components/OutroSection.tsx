@@ -1,12 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { ArrowUp } from "lucide-react";
 import Layout from "./Layout";
 
 export default function OutroSection() {
+    const [copied, setCopied] = useState(false);
+
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    const handleCopyEmail = async () => {
+        await navigator.clipboard.writeText("kimdaaeul0406@gmail.com");
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
     };
 
     return (
@@ -17,12 +26,31 @@ export default function OutroSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
             >
-                <div className="mb-16">
+                <div className="mb-12">
                     <h3 className="text-2xl md:text-3xl font-light text-gray-800 leading-relaxed">
                         매 프로젝트를 통해 배우고 확장해왔습니다.<br />
                         앞으로도 저만의 시선으로,<br />
                         <span className="font-medium text-gray-900">더 나은 결과를 만들어가고자 합니다.</span>
                     </h3>
+                </div>
+
+                {/* Contact CTA */}
+                <div className="mb-16">
+                    <p className="text-sm text-gray-400 mb-4">함께 일하고 싶으시다면</p>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <a
+                            href="mailto:kimdaaeul0406@gmail.com"
+                            className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 hover:shadow-lg transition-all active:scale-95"
+                        >
+                            ✉ 메일 보내기
+                        </a>
+                        <button
+                            onClick={handleCopyEmail}
+                            className="inline-flex items-center gap-2 px-6 py-3 border border-gray-200 bg-white text-gray-600 rounded-full text-sm font-medium hover:bg-gray-50 hover:border-gray-300 transition-all active:scale-95"
+                        >
+                            {copied ? "✓ 복사됨!" : "📋 이메일 복사"}
+                        </button>
+                    </div>
                 </div>
 
                 <div className="w-10 h-px bg-gray-300 mx-auto mb-16" />
