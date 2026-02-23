@@ -100,16 +100,18 @@ export default function ProjectCard({ project, isFeatured = false, onSelect }: P
                         <Github className="w-3.5 h-3.5" />
                         GitHub
                     </a>
-                    <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg bg-gray-900 text-white text-xs font-semibold shadow-sm hover:bg-gray-800 hover:shadow-md transition-all active:scale-95"
-                    >
-                        <ExternalLink className="w-3.5 h-3.5" />
-                        Live Demo
-                    </a>
+                    {project.live && (
+                        <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg bg-gray-900 text-white text-xs font-semibold shadow-sm hover:bg-gray-800 hover:shadow-md transition-all active:scale-95"
+                        >
+                            <ExternalLink className="w-3.5 h-3.5" />
+                            Live Demo
+                        </a>
+                    )}
                 </div>
             </div>
         </div>

@@ -11,9 +11,9 @@ import Layout from "./Layout";
 export default function ProjectsSection() {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-    // Define exact project groups by Title or ID
-    const topRowProjects = projects.filter(p => ["쉼온", "젤리주식", "듀센트"].includes(p.title));
-    const bottomRowProjects = projects.filter(p => ["루멘", "센스가드"].includes(p.title));
+    // Filter by stable IDs instead of title strings
+    const topRowProjects = projects.filter(p => [1, 2, 3].includes(p.id));
+    const bottomRowProjects = projects.filter(p => [4, 5].includes(p.id));
 
     return (
         <Layout id="projects" className="py-24 bg-transparent">
@@ -53,24 +53,21 @@ export default function ProjectsSection() {
 
                 {/* Bottom Grid: 2 Columns */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-4/5 lg:mx-auto">
-                    {bottomRowProjects.map((project, index) => {
-                        const isFeatured = true;
-                        return (
-                            <motion.div
-                                key={project.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                            >
-                                <ProjectCard
-                                    project={project}
-                                    isFeatured={isFeatured}
-                                    onSelect={() => setSelectedProject(project)}
-                                />
-                            </motion.div>
-                        );
-                    })}
+                    {bottomRowProjects.map((project, index) => (
+                        <motion.div
+                            key={project.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                        >
+                            <ProjectCard
+                                project={project}
+                                isFeatured={true}
+                                onSelect={() => setSelectedProject(project)}
+                            />
+                        </motion.div>
+                    ))}
                 </div>
             </div>
 

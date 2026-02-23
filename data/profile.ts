@@ -4,7 +4,7 @@ export const profile: Profile = {
     name: "김다슬",
     birth: "1996-04-06",
     email: "kimdaaeul0406@gmail.com",
-    phone: "010-5779-2271",
+    phone: process.env.NEXT_PUBLIC_PHONE ?? "",
     github: "https://github.com/kimdaaeul0406-lang",
 };
 

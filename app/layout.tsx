@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 const siteUrl = "https://daseul-portfolio.vercel.app";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "김다슬 | Frontend Developer Portfolio",
   description:
     "감성은 설계하고, 기능은 끝까지 구현합니다. Pastel UI, Responsive Web, AI + Data 전문 프론트엔드 개발자 김다슬의 포트폴리오입니다.",

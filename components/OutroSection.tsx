@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { ArrowUp } from "lucide-react";
 import Layout from "./Layout";
+import { profile } from "../data/profile";
 
 export default function OutroSection() {
     const [copied, setCopied] = useState(false);
@@ -13,7 +14,7 @@ export default function OutroSection() {
     };
 
     const handleCopyEmail = async () => {
-        await navigator.clipboard.writeText("kimdaaeul0406@gmail.com");
+        await navigator.clipboard.writeText(profile.email);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
@@ -39,7 +40,7 @@ export default function OutroSection() {
                     <p className="text-sm text-gray-400 mb-4">함께 일하고 싶으시다면</p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                         <a
-                            href="mailto:kimdaaeul0406@gmail.com"
+                            href={`mailto:${profile.email}`}
                             className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 hover:shadow-lg transition-all active:scale-95"
                         >
                             ✉ 메일 보내기
@@ -65,7 +66,7 @@ export default function OutroSection() {
                 </button>
 
                 <footer className="mt-20 text-xs text-gray-400 font-mono tracking-wider">
-                    <p>© 2026 Daseul. All rights reserved.</p>
+                    <p>© {new Date().getFullYear()} Daseul. All rights reserved.</p>
                 </footer>
             </motion.div>
         </Layout>

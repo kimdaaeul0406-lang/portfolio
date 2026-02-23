@@ -3,10 +3,12 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 import Layout from "./Layout";
 
 export default function IntroSection() {
     const keywords = ["Pastel UI", "Responsive Web", "AI + Data"];
+    const [imageError, setImageError] = useState(false);
 
     return (
         <Layout id="intro" className="min-h-screen items-center text-center relative overflow-hidden" maxWidth="max-w-[1920px]">
@@ -41,18 +43,18 @@ export default function IntroSection() {
             >
                 {/* Profile Photo */}
                 <div className="w-28 h-28 rounded-full overflow-hidden mb-6 border-2 border-white shadow-lg bg-gradient-to-br from-indigo-50 to-pink-50 flex items-center justify-center">
-                    <Image
-                        src="/profile.jpg"
-                        alt="김다슬"
-                        width={112}
-                        height={112}
-                        className="object-cover w-full h-full"
-                        onError={(e) => {
-                            const target = e.currentTarget;
-                            target.style.display = "none";
-                            target.parentElement!.innerHTML = '<span class="text-3xl font-bold text-gray-300">D</span>';
-                        }}
-                    />
+                    {imageError ? (
+                        <span className="text-3xl font-bold text-gray-300">D</span>
+                    ) : (
+                        <Image
+                            src="/profile.jpg"
+                            alt="김다슬"
+                            width={112}
+                            height={112}
+                            className="object-cover w-full h-full"
+                            onError={() => setImageError(true)}
+                        />
+                    )}
                 </div>
 
                 {/* Label */}

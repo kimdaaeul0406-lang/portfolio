@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Github, ExternalLink, ImageIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Project } from "../types";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 interface ProjectModalProps {
     project: Project | null;
@@ -28,6 +28,15 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
         }
     }, [project]);
 
+    const navigate = useCallback((newDirection: number) => {
+        setDirection(newDirection);
+        setLightboxIndex((prev) => {
+            if (prev === null) return null;
+            const total = galleryImages.length;
+            return (prev + newDirection + total) % total;
+        });
+    }, [galleryImages.length]);
+
     // Keyboard navigation for lightbox
     useEffect(() => {
         if (lightboxIndex === null) return;
@@ -40,16 +49,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [lightboxIndex]);
-
-    const navigate = (newDirection: number) => {
-        setDirection(newDirection);
-        setLightboxIndex((prev) => {
-            if (prev === null) return null;
-            const total = galleryImages.length;
-            return (prev + newDirection + total) % total;
-        });
-    };
+    }, [lightboxIndex, navigate]);
 
     // Lock body scroll when modal is open
     useEffect(() => {
@@ -237,15 +237,17 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                                             <Github className="w-4 h-4" />
                                             GitHub
                                         </a>
-                                        <a
-                                            href={project.live}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-gray-900 text-white text-sm font-semibold shadow-sm hover:bg-gray-800 hover:shadow-md transition-all active:scale-95"
-                                        >
-                                            <ExternalLink className="w-4 h-4" />
-                                            Live Demo
-                                        </a>
+                                        {project.live && (
+                                            <a
+                                                href={project.live}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-gray-900 text-white text-sm font-semibold shadow-sm hover:bg-gray-800 hover:shadow-md transition-all active:scale-95"
+                                            >
+                                                <ExternalLink className="w-4 h-4" />
+                                                Live Demo
+                                            </a>
+                                        )}
                                     </div>
                                 </div>
                             </div>

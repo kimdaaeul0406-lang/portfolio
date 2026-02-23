@@ -6,10 +6,8 @@ export interface Project {
     image: string;
     images?: string[];
     github: string;
-    live: string;
-    tags?: string[];
+    live?: string;
     techStack?: string[];
-    whyBuiltThis?: string;
 }
 
 export interface Profile {

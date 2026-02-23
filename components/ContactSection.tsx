@@ -4,13 +4,15 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import Layout from "./Layout";
 import { profile } from "../data/profile";
-import { Copy, Eye, EyeOff, Github, Mail, Phone, User, Calendar } from "lucide-react";
+import { Eye, EyeOff, Github, User, Calendar } from "lucide-react";
 
 export default function ContactSection() {
     const [showPhone, setShowPhone] = useState(false);
 
     // Simple masking logic
-    const maskedPhone = profile.phone.replace(/(\d{3})-\d{4}-(\d{4})/, "$1-****-$2");
+    const maskedPhone = profile.phone
+        ? profile.phone.replace(/(\d{3})-\d{4}-(\d{4})/, "$1-****-$2")
+        : "";
 
     return (
         <Layout id="contact" className="py-24">
@@ -65,21 +67,23 @@ export default function ContactSection() {
                                 </a>
                             </div>
 
-                            {/* Phone */}
-                            <div>
-                                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Phone</p>
-                                <div className="flex items-center gap-3">
-                                    <span className="text-lg font-mono text-gray-900">
-                                        {showPhone ? profile.phone : maskedPhone}
-                                    </span>
-                                    <button
-                                        onClick={() => setShowPhone(!showPhone)}
-                                        className="text-gray-400 hover:text-gray-900 transition-colors"
-                                    >
-                                        {showPhone ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                                    </button>
+                            {/* Phone - only show if available */}
+                            {profile.phone && (
+                                <div>
+                                    <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Phone</p>
+                                    <div className="flex items-center gap-3">
+                                        <span className="text-lg font-mono text-gray-900">
+                                            {showPhone ? profile.phone : maskedPhone}
+                                        </span>
+                                        <button
+                                            onClick={() => setShowPhone(!showPhone)}
+                                            className="text-gray-400 hover:text-gray-900 transition-colors"
+                                        >
+                                            {showPhone ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            )}
 
                             {/* Github */}
                             <div>
