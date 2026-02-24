@@ -5,20 +5,26 @@ import SkillsSection from "../components/SkillsSection";
 import ContactSection from "../components/ContactSection";
 import OutroSection from "../components/OutroSection";
 import ScrollBackground from "../components/ScrollBackground";
+import LoadingScreen from "../components/LoadingScreen";
+import ScrollProgress from "../components/ScrollProgress";
 
 export default function Home() {
   return (
-    <ScrollBackground>
-      <Navbar />
+    <>
+      <LoadingScreen />
+      <ScrollProgress />
+      <ScrollBackground>
+        <Navbar />
 
-      {/* Main Content Assembly */}
-      <main className="w-full relative z-10">
-        <IntroSection />
-        <ProjectsSection />
-        <SkillsSection />
-        <ContactSection />
-        <OutroSection />
-      </main>
-    </ScrollBackground>
+        {/* Main Content Assembly */}
+        <main className="w-full relative z-10">
+          <IntroSection />
+          <ProjectsSection />
+          <SkillsSection />
+          <ContactSection />
+          <OutroSection />
+        </main>
+      </ScrollBackground>
+    </>
   );
 }

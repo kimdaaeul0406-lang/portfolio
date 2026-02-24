@@ -12,8 +12,8 @@ export default function ProjectsSection() {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
     // Filter by stable IDs instead of title strings
-    const topRowProjects = projects.filter(p => [1, 2, 3].includes(p.id));
-    const bottomRowProjects = projects.filter(p => [4, 5].includes(p.id));
+    const topRowProjects = projects.filter(p => [4, 5].includes(p.id));
+    const bottomRowProjects = projects.filter(p => [1, 2, 3].includes(p.id));
 
     return (
         <Layout id="projects" className="py-24 bg-transparent">
@@ -32,8 +32,8 @@ export default function ProjectsSection() {
             </motion.div>
 
             <div className="max-w-5xl mx-auto flex flex-col gap-16">
-                {/* Top Grid: 3 Columns */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Top Grid: 2 Columns - Featured (루멘, 센스가드) */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-4/5 lg:mx-auto">
                     {topRowProjects.map((project, index) => (
                         <motion.div
                             key={project.id}
@@ -44,15 +44,15 @@ export default function ProjectsSection() {
                         >
                             <ProjectCard
                                 project={project}
-                                isFeatured={false}
+                                isFeatured={true}
                                 onSelect={() => setSelectedProject(project)}
                             />
                         </motion.div>
                     ))}
                 </div>
 
-                {/* Bottom Grid: 2 Columns */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:w-4/5 lg:mx-auto">
+                {/* Bottom Grid: 3 Columns (쉼온, 젤리주식, 듀센트) */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {bottomRowProjects.map((project, index) => (
                         <motion.div
                             key={project.id}
@@ -63,7 +63,7 @@ export default function ProjectsSection() {
                         >
                             <ProjectCard
                                 project={project}
-                                isFeatured={true}
+                                isFeatured={false}
                                 onSelect={() => setSelectedProject(project)}
                             />
                         </motion.div>

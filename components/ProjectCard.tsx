@@ -10,16 +10,50 @@ interface ProjectCardProps {
     onSelect?: () => void;
 }
 
+// Featured 프로젝트별 고유 색상
+const featuredColors: Record<number, {
+    border: string;
+    shadow: string;
+    badge: string;
+    tag: string;
+    accent: string;
+    hover: string;
+}> = {
+    4: { // 루멘
+        border: "border-amber-200",
+        shadow: "hover:shadow-[0_8px_30px_rgba(245,158,11,0.2)]",
+        badge: "bg-amber-50 text-amber-500",
+        tag: "bg-amber-50 text-amber-700 border-amber-200",
+        accent: "from-amber-400 to-yellow-300",
+        hover: "group-hover:text-amber-500",
+    },
+    5: { // 센스가드
+        border: "border-blue-200",
+        shadow: "hover:shadow-[0_8px_30px_rgba(59,130,246,0.2)]",
+        badge: "bg-blue-50 text-blue-500",
+        tag: "bg-blue-50 text-blue-600 border-blue-200",
+        accent: "from-blue-400 to-cyan-400",
+        hover: "group-hover:text-blue-500",
+    },
+};
+
 export default function ProjectCard({ project, isFeatured = false, onSelect }: ProjectCardProps) {
+    const colors = isFeatured ? featuredColors[project.id] : null;
+
     return (
         <div
             onClick={onSelect}
-            className={`group flex flex-col h-full rounded-2xl overflow-hidden transition-all duration-500 border bg-white cursor-pointer
+            className={`group flex flex-col h-full rounded-2xl overflow-hidden transition-all duration-500 border bg-white cursor-pointer relative
             ${isFeatured
-                    ? 'border-blue-100 shadow-lg hover:shadow-[0_8px_30px_rgba(129,140,248,0.2)] hover:-translate-y-1 min-h-[520px]'
+                    ? `${colors?.border ?? 'border-blue-100'} shadow-lg ${colors?.shadow ?? ''} hover:-translate-y-1 min-h-[520px]`
                     : 'border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgba(196,181,253,0.15)] hover:-translate-y-1 min-h-[450px]'}
             `}
         >
+            {/* Featured top accent bar */}
+            {isFeatured && colors && (
+                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${colors.accent} z-10`} />
+            )}
+
             {/* Image Container */}
             <div className="relative w-full h-52 overflow-hidden bg-gray-50 border-b border-gray-100">
                 <Image
@@ -48,12 +82,12 @@ export default function ProjectCard({ project, isFeatured = false, onSelect }: P
                 {/* Header */}
                 <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
-                        <h3 className={`font-bold text-gray-900 group-hover:text-indigo-500 transition-colors ${isFeatured ? 'text-xl' : 'text-lg'}`}>
+                        <h3 className={`font-bold text-gray-900 transition-colors ${isFeatured ? `text-xl ${colors?.hover ?? ''}` : 'text-lg group-hover:text-indigo-500'}`}>
                             {project.title}
                         </h3>
                         {/* Featured Badge */}
                         {isFeatured && (
-                            <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-500 text-[10px] font-bold uppercase tracking-wider">
+                            <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${colors?.badge ?? 'bg-indigo-50 text-indigo-500'}`}>
                                 Featured
                             </span>
                         )}
@@ -77,8 +111,8 @@ export default function ProjectCard({ project, isFeatured = false, onSelect }: P
                                 <span
                                     key={tech}
                                     className={`border px-2.5 py-1 rounded-md text-[11px] font-semibold tracking-wide
-                                    ${isFeatured
-                                            ? 'bg-indigo-50 text-indigo-600 border-indigo-100'
+                                    ${isFeatured && colors
+                                            ? colors.tag
                                             : 'bg-gray-50 text-gray-600 border-gray-200'}`}
                                 >
                                     {tech}

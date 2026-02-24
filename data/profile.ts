@@ -16,10 +16,3 @@ export const skills: SkillSet[] = [
     { category: "Tools", skills: ["GitHub", "Figma", "VS Code"] },
 ];
 
-export const trainingLearnings = [
-    "AI 기반 반응형 웹화면 구현",
-    "PHP 사용자 인증 서버프로그램 구축",
-    "데이터 융합웹개발",
-    "React 기반 API 활용 반응형 UI 구현",
-    "LLM 활용 응용SW개발 프로젝트",
-];

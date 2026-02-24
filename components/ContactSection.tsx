@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import Layout from "./Layout";
 import { profile } from "../data/profile";
-import { Eye, EyeOff, Github, User, Calendar } from "lucide-react";
+import { Eye, EyeOff, Github, User, Calendar, Phone } from "lucide-react";
 
 export default function ContactSection() {
     const [showPhone, setShowPhone] = useState(false);
@@ -71,8 +71,8 @@ export default function ContactSection() {
                             {profile.phone && (
                                 <div>
                                     <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Phone</p>
-                                    <div className="flex items-center gap-3">
-                                        <span className="text-lg font-mono text-gray-900">
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-lg font-semibold font-mono text-gray-900 tracking-[0.35em]">
                                             {showPhone ? profile.phone : maskedPhone}
                                         </span>
                                         <button
