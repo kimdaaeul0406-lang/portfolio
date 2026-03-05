@@ -48,12 +48,12 @@ export const projects: Project[] = [
     {
         id: 5,
         title: "센스가드",
-        description: "AI + 공공데이터 기반 안전 알림",
-        keyPoint: "다양한 형태의 공공데이터 API를 통합 가공하고, Transformer.js로 온디바이스 AI 분석을 구현한 안전 정보 서비스입니다.",
+        description: "AI + 공공데이터 기반 안전 알림 (Web & App)",
+        keyPoint: "다양한 형태의 공공데이터 API를 통합 가공하고, Transformer.js로 온디바이스 AI 분석을 구현했습니다. Flutter로 모바일 앱까지 확장하여 웹과 앱 모두 지원하는 크로스 플랫폼 서비스로 발전시켰습니다.",
         image: "/sense-guard.jpg",
         images: ["/sense-guard1.jpg", "/sense-guard2.jpg", "/sense-guard3.jpg"],
         github: "https://github.com/kimdaaeul0406-lang/SENSE-GUARD",
         live: "https://sense-guard.vercel.app/",
-        techStack: ["Next.js", "Supabase", "Public Data API", "Transformer.js"],
+        techStack: ["Next.js", "Supabase", "Public Data API", "Transformer.js", "Flutter", "Dart"],
     },
 ];

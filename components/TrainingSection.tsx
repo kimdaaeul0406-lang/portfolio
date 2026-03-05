@@ -12,7 +12,7 @@ const trainingData = {
     },
     awards: [
         {
-            title: "루멘 송암전 최우상",
+            title: "루멘 송암전 최우수상",
             project: "루멘",
             description: "AI 기반 사주/타로 서비스 프로젝트로 최우수상 수상",
         },

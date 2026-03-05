@@ -77,7 +77,7 @@ export default function ProjectCard({ project, isFeatured = false, onSelect }: P
                 {project.id === 4 && (
                     <div className="absolute top-3 left-3 z-10">
                         <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-500/90 backdrop-blur-sm text-white text-[10px] font-bold rounded-full shadow-md uppercase tracking-wide">
-                            최우상
+                            최우수상
                         </span>
                     </div>
                 )}
