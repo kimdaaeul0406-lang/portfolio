@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Mail, Copy, Check } from "lucide-react";
 import Layout from "./Layout";
 import { profile } from "../data/profile";
 
@@ -43,13 +43,13 @@ export default function OutroSection() {
                             href={`mailto:${profile.email}`}
                             className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 hover:shadow-lg transition-all active:scale-95"
                         >
-                            ✉ 메일 보내기
+                            <Mail className="w-4 h-4" /> 메일 보내기
                         </a>
                         <button
                             onClick={handleCopyEmail}
                             className="inline-flex items-center gap-2 px-6 py-3 border border-gray-200 bg-white text-gray-600 rounded-full text-sm font-medium hover:bg-gray-50 hover:border-gray-300 transition-all active:scale-95"
                         >
-                            {copied ? "✓ 복사됨!" : "📋 이메일 복사"}
+                            {copied ? (<><Check className="w-4 h-4" /> 복사됨!</>) : (<><Copy className="w-4 h-4" /> 이메일 복사</>)}
                         </button>
                     </div>
                 </div>

@@ -52,7 +52,7 @@ export default function LoadingScreen() {
                         transition={{ delay: 0.5, duration: 0.4 }}
                         className="mt-6 text-sm text-gray-400 font-medium tracking-wider"
                     >
-                        Frontend Developer
+                        Software Creator
                     </motion.p>
                 </motion.div>
             )}

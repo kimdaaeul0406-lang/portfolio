@@ -49,10 +49,7 @@ export default function ProjectCard({ project, isFeatured = false, onSelect }: P
                     : 'border-gray-100 shadow-sm hover:shadow-[0_8px_30px_rgba(196,181,253,0.15)] hover:-translate-y-1 min-h-[450px]'}
             `}
         >
-            {/* Featured top accent bar */}
-            {isFeatured && colors && (
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${colors.accent} z-10`} />
-            )}
+
 
             {/* Image Container */}
             <div className="relative w-full h-52 overflow-hidden bg-gray-50 border-b border-gray-100">
@@ -75,6 +72,15 @@ export default function ProjectCard({ project, isFeatured = false, onSelect }: P
                         자세히 보기
                     </span>
                 </div>
+
+                {/* Award Badge */}
+                {project.id === 4 && (
+                    <div className="absolute top-3 left-3 z-10">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-amber-500/90 backdrop-blur-sm text-white text-[10px] font-bold rounded-full shadow-md uppercase tracking-wide">
+                            최우상
+                        </span>
+                    </div>
+                )}
             </div>
 
             {/* Content Section */}

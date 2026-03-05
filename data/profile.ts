@@ -11,6 +11,7 @@ export const profile: Profile = {
 export const skills: SkillSet[] = [
     { category: "Frontend", skills: ["HTML", "CSS", "JavaScript", "React", "Next.js", "Tailwind"] },
     { category: "Backend", skills: ["PHP", "MySQL", "Supabase", "REST API", "Auth Handling"] },
+    { category: "Mobile", skills: ["Flutter", "Dart"] },
     { category: "AI & Data", skills: ["OpenAI API", "Public Data API", "Prompt Design", "Data Parsing"] },
     { category: "Deployment", skills: ["Vercel", "Netlify", "dothome"] },
     { category: "Tools", skills: ["GitHub", "Figma", "VS Code"] },

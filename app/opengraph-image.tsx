@@ -112,7 +112,7 @@ export default async function Image() {
                             boxShadow: "0 2px 10px rgba(0, 0, 0, 0.04)",
                         }}
                     >
-                        Frontend Developer · Portfolio
+                        Software Creator · Portfolio
                     </div>
 
                     {/* Name */}
@@ -152,9 +152,9 @@ export default async function Image() {
                         }}
                     >
                         {[
-                            { label: "Pastel UI", color: "rgba(252, 205, 211, 0.35)" },
-                            { label: "Responsive Web", color: "rgba(186, 230, 253, 0.35)" },
-                            { label: "AI + Data", color: "rgba(221, 214, 254, 0.35)" },
+                            { label: "Planning", color: "rgba(252, 205, 211, 0.35)" },
+                            { label: "Design", color: "rgba(186, 230, 253, 0.35)" },
+                            { label: "Development", color: "rgba(221, 214, 254, 0.35)" },
                         ].map((keyword) => (
                             <div
                                 key={keyword.label}

@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import IntroSection from "../components/IntroSection";
 import ProjectsSection from "../components/ProjectsSection";
 import SkillsSection from "../components/SkillsSection";
+import TrainingSection from "../components/TrainingSection";
 import ContactSection from "../components/ContactSection";
 import OutroSection from "../components/OutroSection";
 import ScrollBackground from "../components/ScrollBackground";
@@ -21,6 +22,7 @@ export default function Home() {
           <IntroSection />
           <ProjectsSection />
           <SkillsSection />
+          <TrainingSection />
           <ContactSection />
           <OutroSection />
         </main>

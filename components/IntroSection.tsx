@@ -2,13 +2,10 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
-import { useState } from "react";
 import Layout from "./Layout";
 
 export default function IntroSection() {
-    const keywords = ["Pastel UI", "Responsive Web", "AI + Data"];
-    const [imageError, setImageError] = useState(false);
+    const keywords = ["Planning", "Design", "Development"];
 
     return (
         <Layout id="intro" className="min-h-screen items-center text-center relative overflow-hidden" maxWidth="max-w-[1920px]">
@@ -41,25 +38,9 @@ export default function IntroSection() {
                 transition={{ duration: 1, ease: "easeOut" }}
                 className="flex flex-col items-center relative z-10 w-full px-6 py-12 md:py-28"
             >
-                {/* Profile Photo */}
-                <div className="w-28 h-28 rounded-full overflow-hidden mb-6 border-2 border-white shadow-lg bg-gradient-to-br from-indigo-50 to-pink-50 flex items-center justify-center">
-                    {imageError ? (
-                        <span className="text-3xl font-bold text-gray-300">D</span>
-                    ) : (
-                        <Image
-                            src="/profile.jpg"
-                            alt="김다슬"
-                            width={112}
-                            height={112}
-                            className="object-cover w-full h-full"
-                            onError={() => setImageError(true)}
-                        />
-                    )}
-                </div>
-
                 {/* Label */}
                 <span className="inline-block px-4 py-1.5 mb-8 text-xs font-semibold tracking-wider text-gray-500 uppercase bg-white/80 backdrop-blur-sm rounded-full border border-gray-100 shadow-sm">
-                    Frontend Developer · Daseul
+                    Software Creator · Daseul
                 </span>
 
                 {/* Main Heading */}
@@ -70,8 +51,8 @@ export default function IntroSection() {
 
                 {/* Subtitle */}
                 <p className="text-sm md:text-lg text-gray-500 font-medium leading-relaxed mb-10 max-w-3xl break-keep text-balance">
-                    PHP 풀스택부터 Next.js + AI까지,&nbsp;<br className="hidden md:block" />
-                    매 프로젝트마다 기술의 폭을 넓혀온 주니어 개발자입니다.
+                    기획부터 디자인, 개발까지&nbsp;<br className="hidden md:block" />
+                    하나의 흐름으로 만들어내는 소프트웨어 크리에이터입니다.
                 </p>
 
                 {/* Keywords */}

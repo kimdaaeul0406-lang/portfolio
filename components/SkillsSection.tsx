@@ -8,13 +8,14 @@ import { skills } from "../data/profile";
 const categoryTheme: Record<string, { border: string; hover: string }> = {
     Frontend: { border: "border-sky-300", hover: "hover:bg-sky-50 hover:text-sky-600" },
     Backend: { border: "border-teal-300", hover: "hover:bg-teal-50 hover:text-teal-600" },
+    Mobile: { border: "border-cyan-300", hover: "hover:bg-cyan-50 hover:text-cyan-600" },
     "AI & Data": { border: "border-purple-300", hover: "hover:bg-purple-50 hover:text-purple-600" },
     Deployment: { border: "border-orange-300", hover: "hover:bg-orange-50 hover:text-orange-600" },
     Tools: { border: "border-pink-300", hover: "hover:bg-pink-50 hover:text-pink-600" },
 };
 
 export default function SkillsSection() {
-    const orderedCategories = ["Frontend", "Backend", "AI & Data", "Deployment", "Tools"];
+    const orderedCategories = ["Frontend", "Backend", "Mobile", "AI & Data", "Deployment", "Tools"];
 
     return (
         <Layout id="skills" className="py-20 bg-transparent">
@@ -38,7 +39,7 @@ export default function SkillsSection() {
                         if (!category) return null;
 
                         const theme = categoryTheme[catName] ?? categoryTheme.Frontend;
-                        const gridClass = index < 2 ? "lg:col-span-3" : "lg:col-span-2";
+                        const gridClass = index < 3 ? "lg:col-span-2" : "lg:col-span-2";
 
                         return (
                             <motion.div

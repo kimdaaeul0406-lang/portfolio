@@ -16,17 +16,18 @@ const siteUrl = "https://daseul-portfolio.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "김다슬 | Frontend Developer Portfolio",
+  title: "김다슬 | Software Creator Portfolio",
   description:
-    "감성은 설계하고, 기능은 끝까지 구현합니다. Pastel UI, Responsive Web, AI + Data 전문 프론트엔드 개발자 김다슬의 포트폴리오입니다.",
+    "감성은 설계하고, 기능은 끝까지 구현합니다. 기획부터 디자인, 개발까지 하나의 흐름으로 만들어내는 소프트웨어 크리에이터 김다슬의 포트폴리오입니다.",
   keywords: [
-    "프론트엔드",
-    "개발자",
+    "소프트웨어 크리에이터",
+    "기획",
+    "디자인",
+    "개발",
     "포트폴리오",
     "React",
     "Next.js",
     "김다슬",
-    "Frontend Developer",
   ],
   authors: [{ name: "김다슬" }],
   creator: "김다슬",
@@ -35,9 +36,9 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     url: siteUrl,
     siteName: "Daseul Portfolio",
-    title: "김다슬 | Frontend Developer Portfolio",
+    title: "김다슬 | Software Creator Portfolio",
     description:
-      "감성은 설계하고, 기능은 끝까지 구현합니다. Pastel UI · Responsive Web · AI + Data",
+      "감성은 설계하고, 기능은 끝까지 구현합니다. Planning · Design · Development",
     images: [
       {
         url: `${siteUrl}/opengraph-image`,
@@ -49,9 +50,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "김다슬 | Frontend Developer Portfolio",
+    title: "김다슬 | Software Creator Portfolio",
     description:
-      "감성은 설계하고, 기능은 끝까지 구현합니다. Pastel UI · Responsive Web · AI + Data",
+      "감성은 설계하고, 기능은 끝까지 구현합니다. Planning · Design · Development",
     images: [`${siteUrl}/opengraph-image`],
   },
 
